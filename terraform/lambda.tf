@@ -36,10 +36,20 @@ resource "aws_iam_policy" "s3_policy" {
   ]
 }
 EOF
+
+    depends_on = [
+        aws_s3_bucket.s3_bucket
+    ]
+
 }
 
 # IAM Role Policy Attachment
 resource "aws_iam_role_policy_attachment" "lambda_s3_role_policy_attachment" {
     role = "${aws_iam_role.lambda_role.id}"
     policy_arn = "${aws_iam_policy.s3_policy.arn}"
+
+    depends_on = [
+        aws_iam_role.lambda_role,
+        aws_iam_policy.s3_policy
+    ]
 }
