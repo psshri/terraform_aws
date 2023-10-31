@@ -17,12 +17,11 @@ resource "aws_iam_role" "lambda_role" {
 EOF
 }
 
-
 # IAM Policy ####################################
 resource "aws_iam_policy" "s3_policy" {
-  name        = "s3_policy"
-  description = "s3_get_put_policy"
-  policy = <<EOF
+    name        = "s3_policy"
+    description = "s3_get_put_policy"
+    policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -37,4 +36,10 @@ resource "aws_iam_policy" "s3_policy" {
   ]
 }
 EOF
+}
+
+# IAM Role Policy Attachment
+resource "aws_iam_role_policy_attachment" "lambda_s3_role_policy_attachment" {
+    role = "${aws_iam_role.lambda_role.id}"
+    policy_arn = "${aws_iam_policy.s3_policy.arn}"
 }

@@ -18,6 +18,10 @@ output "iam_role_arn" {
     value = aws_iam_role.lambda_role.arn
 }
 
+output "iam_role_id" {
+    value = aws_iam_role.lambda_role.id
+}
+
 # IAM Policy ####################################
 
 output "iam_policy_arn" {
