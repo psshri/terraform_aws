@@ -11,10 +11,14 @@ Whenever a new file is created in the above S3 bucket - a notification should be
 #### S3
 ![S3](images/s3.png)
 
-#### Lambda
+#### Postman
+![Postman](images/postman.png)
 
+#### Lambda
+![lambda](images/lambda.png)
 
 #### API GW
-
+![APIGW](images/apigw.png)
 
 #### SNS
+![SNS](images/sns.png)
