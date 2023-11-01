@@ -61,6 +61,7 @@ data "archive_file" "python_code_zip" {
   output_path = "${path.module}/python/hello-python.zip"
 }
 
+# Lambda Function
 resource "aws_lambda_function" "lambda_function" {
   filename         = "${path.module}/python/hello-python.zip"
   function_name    = "test_lambda_function"
@@ -73,27 +74,3 @@ resource "aws_lambda_function" "lambda_function" {
     aws_iam_role_policy_attachment.lambda_s3_role_policy_attachment,
   ]
 }
-
-# resource "aws_lambda_function" "s3" {
-#   function_name = "s3"
-#   s3_bucket = aws_s3_bucket.lambda_bucket.id
-#   s3_key    = aws_s3_object.lambda_s3.key
-#   runtime = "nodejs16.x"
-#   handler = "function.handler"
-#   source_code_hash = data.archive_file.lambda_s3.output_base64sha256
-#   role = aws_iam_role.s3_lambda_exec.arn
-# }
-
-# resource "aws_lambda_function" "test_lambda" {
-#   filename      = "lambda_function_payload.zip"
-#   function_name = "lambda_function_name"
-#   role          = aws_iam_role.iam_for_lambda.arn
-#   handler       = "index.test"
-#   source_code_hash = data.archive_file.lambda.output_base64sha256
-#   runtime = "nodejs18.x"
-#   environment {
-#     variables = {
-#       foo = "bar"
-#     }
-#   }
-# }
