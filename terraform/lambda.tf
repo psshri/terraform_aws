@@ -53,3 +53,10 @@ resource "aws_iam_role_policy_attachment" "lambda_s3_role_policy_attachment" {
         aws_iam_policy.s3_policy
     ]
 }
+
+# Zip the file
+data "archive_file" "python_code_zip" {
+type        = "zip"
+source_dir  = "${path.module}/python/"
+output_path = "${path.module}/python/hello-python.zip"
+}
