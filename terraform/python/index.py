@@ -10,6 +10,6 @@ def lambda_handler(event, context):
 
     except Exception as e:  
       return {
-        'statusCode': 200,
-        'body': 'Hello from lambda changed again test'
+        'statusCode': 500,
+        'body': json.dumps('Error: ' + str(e))
       }
