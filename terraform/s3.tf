@@ -48,3 +48,13 @@ resource "aws_s3_bucket_public_access_block" "s3_bucket_access" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+# SNS
+resource "aws_s3_bucket_notification" "s3_bucket_notification" {
+  bucket = aws_s3_bucket.s3_bucket.id
+
+  topic {
+    topic_arn     = aws_sns_topic.sns_topic.arn
+    events        = ["s3:ObjectCreated:*"]
+  }
+}
