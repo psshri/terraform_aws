@@ -2,6 +2,10 @@
 
 data "aws_s3_bucket" "s3_bucket" {
   bucket = "s3-bucket-psshri-8441"
+
+  depends_on = [
+    aws_s3_bucket.s3_bucket
+  ]
 }
 
 output "s3_arn" {
