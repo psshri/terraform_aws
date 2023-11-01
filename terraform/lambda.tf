@@ -86,7 +86,7 @@ resource "aws_lambda_function" "lambda_function" {
 
   environment {
     variables = {
-      S3_BUCKET_NAME = "bar"
+      S3_BUCKET_NAME = aws_s3_bucket.s3_bucket.bucket
     }
   }
 
