@@ -42,7 +42,8 @@ resource "aws_iam_policy" "s3_sns_policy" {
 EOF
 
   depends_on = [
-    aws_s3_bucket.s3_bucket
+    aws_s3_bucket.s3_bucket,
+    aws_sns_topic.sns_topic
   ]
 
 }
@@ -92,5 +93,7 @@ resource "aws_lambda_function" "lambda_function" {
 
   depends_on = [
     aws_iam_role_policy_attachment.lambda_s3_role_policy_attachment,
+    aws_iam_role.lambda_role,
+    aws_s3_bucket.s3_bucket
   ]
 }

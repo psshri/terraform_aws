@@ -81,7 +81,3 @@ output "apigw_execution_arn" {
 output "apigw_integration_id" {
   value = aws_apigatewayv2_integration.http_api_integration.id
 }
-
-# output "test" {
-#   value = aws_apigatewayv2_deployment.http_api_deployment
-# }

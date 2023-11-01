@@ -36,6 +36,9 @@ resource "aws_s3_bucket_versioning" "s3_bucket_versioning" {
   versioning_configuration {
     status = "Disabled"
   }
+  depends_on = [
+    aws_s3_bucket.s3_bucket
+  ]
 }
 
 # Bucket public access
@@ -47,6 +50,10 @@ resource "aws_s3_bucket_public_access_block" "s3_bucket_access" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
+
+  depends_on = [
+    aws_s3_bucket.s3_bucket
+  ]
 }
 
 # SNS
@@ -57,4 +64,9 @@ resource "aws_s3_bucket_notification" "s3_bucket_notification" {
     topic_arn     = aws_sns_topic.sns_topic.arn
     events        = ["s3:ObjectCreated:*"]
   }
+
+  depends_on = [
+    aws_s3_bucket.s3_bucket,
+    aws_sns_topic.sns_topic
+  ]
 }

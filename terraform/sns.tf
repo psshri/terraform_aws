@@ -16,6 +16,10 @@ data "aws_iam_policy_document" "topic" {
       values   = [aws_s3_bucket.s3_bucket.arn]
     }
   }
+
+  depends_on = [
+    aws_s3_bucket.s3_bucket
+  ]
 }
 
 # SNS Topic #####################################
