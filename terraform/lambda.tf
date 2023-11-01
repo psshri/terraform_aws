@@ -84,6 +84,12 @@ resource "aws_lambda_function" "lambda_function" {
   runtime       = "python3.11"
   source_code_hash = data.archive_file.python_code_zip.output_base64sha256
 
+  environment {
+    variables = {
+      S3_BUCKET_NAME = "bar"
+    }
+  }
+
   depends_on = [
     aws_iam_role_policy_attachment.lambda_s3_role_policy_attachment,
   ]
