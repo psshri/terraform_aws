@@ -55,3 +55,17 @@ output "sns_topic_arn" {
 output "sns_topic_subscription_arn" {
   value = aws_sns_topic_subscription.sns_topic_subscription.arn
 }
+
+# API GW ########################################
+
+output "apigw_id" {
+  value = aws_apigatewayv2_api.http_api.id
+}
+
+output "apigw_endpoint" {
+  value = aws_apigatewayv2_api.http_api.api_endpoint
+}
+
+output "apigw_arn" {
+  value = aws_apigatewayv2_api.http_api.arn
+}
