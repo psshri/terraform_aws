@@ -1,0 +1,1 @@
+This is the Lambda function code in Python which sends the request's JSON body to the S3 bucket as a file
