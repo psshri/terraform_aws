@@ -73,12 +73,12 @@ resource "aws_iam_role_policy_attachment" "lambda_s3_role_policy_attachment" {
 data "archive_file" "python_code_zip" {
   type        = "zip"
   source_file = "${path.module}/python/index.py"
-  output_path = "${path.module}/python/hello-python.zip"
+  output_path = "${path.module}/python/python_file.zip"
 }
 
 # Lambda Function
 resource "aws_lambda_function" "lambda_function" {
-  filename      = "${path.module}/python/hello-python.zip"
+  filename      = "${path.module}/python/python_file.zip"
   function_name = "test_lambda_function"
   role          = aws_iam_role.lambda_role.arn
   handler       = "index.lambda_handler"
