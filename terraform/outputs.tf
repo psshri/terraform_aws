@@ -29,7 +29,7 @@ output "iam_role_id" {
 # IAM Policy ####################################
 
 output "iam_policy_arn" {
-  value = aws_iam_policy.s3_policy.arn
+  value = aws_iam_policy.s3_sns_policy.arn
 }
 
 # Lambda ########################################

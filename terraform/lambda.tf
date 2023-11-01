@@ -18,8 +18,8 @@ EOF
 }
 
 # IAM Policy ####################################
-resource "aws_iam_policy" "s3_policy" {
-  name        = "s3_policy"
+resource "aws_iam_policy" "s3_sns_policy" {
+  name        = "s3_sns_policy"
   description = "s3_get_put_policy"
   policy      = <<EOF
 {
@@ -28,10 +28,14 @@ resource "aws_iam_policy" "s3_policy" {
     {
         "Action": [
             "s3:PutObject",
-            "s3:GetObject"
+            "s3:GetObject",
+            "sns:Publish"
         ],
         "Effect": "Allow",
-        "Resource": "${aws_s3_bucket.s3_bucket.arn}/*"
+        "Resource": [
+          "${aws_s3_bucket.s3_bucket.arn}/*",
+          "${aws_sns_topic.sns_topic.arn}"
+        ]
     }
   ]
 }
@@ -46,11 +50,11 @@ EOF
 # IAM Role Policy Attachment
 resource "aws_iam_role_policy_attachment" "lambda_s3_role_policy_attachment" {
   role       = aws_iam_role.lambda_role.id
-  policy_arn = aws_iam_policy.s3_policy.arn
+  policy_arn = aws_iam_policy.s3_sns_policy.arn
 
   depends_on = [
     aws_iam_role.lambda_role,
-    aws_iam_policy.s3_policy
+    aws_iam_policy.s3_sns_policy
   ]
 }
 
