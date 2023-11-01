@@ -46,6 +46,10 @@ output "lambda_invoke_arn" {
   value = aws_lambda_function.lambda_function.invoke_arn
 }
 
+output "lambda_function_name" {
+  value = aws_lambda_function.lambda_function.function_name
+}
+
 # SNS ###########################################
 
 output "sns_topic_arn" {
@@ -69,3 +73,15 @@ output "apigw_endpoint" {
 output "apigw_arn" {
   value = aws_apigatewayv2_api.http_api.arn
 }
+
+output "apigw_execution_arn" {
+  value = aws_apigatewayv2_api.http_api.execution_arn
+}
+
+output "apigw_integration_id" {
+  value = aws_apigatewayv2_integration.http_api_integration.id
+}
+
+# output "test" {
+#   value = aws_apigatewayv2_deployment.http_api_deployment
+# }

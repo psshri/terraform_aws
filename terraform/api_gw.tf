@@ -1,3 +1,4 @@
+# API GW
 resource "aws_apigatewayv2_api" "http_api" {
   name          = "http_api"
   protocol_type = "HTTP"
@@ -21,7 +22,7 @@ resource "aws_apigatewayv2_integration" "http_api_integration" {
 # Route
 resource "aws_apigatewayv2_route" "http_api_route" {
   api_id    = aws_apigatewayv2_api.http_api.id
-  route_key = "GET /path"
+  route_key = "POST /path"
 
   target = "integrations/${aws_apigatewayv2_integration.http_api_integration.id}"
 
@@ -56,4 +57,14 @@ resource "aws_apigatewayv2_stage" "http_api_stage" {
   depends_on = [
     aws_apigatewayv2_api.http_api
   ]
+}
+
+
+resource "aws_lambda_permission" "apigw_lambda" {
+  statement_id = "AllowExecutionFromAPIGateway"
+  action = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda_function.function_name
+  principal = "apigateway.amazonaws.com"
+
+  source_arn = "${aws_apigatewayv2_api.http_api.execution_arn}/*/*/*"
 }
