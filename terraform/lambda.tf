@@ -72,8 +72,8 @@ resource "aws_iam_role_policy_attachment" "lambda_s3_role_policy_attachment" {
 # Zip the file
 data "archive_file" "python_code_zip" {
   type        = "zip"
-  source_file = "${path.module}/python/index.py"
-  output_path = "${path.module}/python/python_file.zip"
+  source_file = "${path.module}/../python/index.py"
+  output_path = "${path.module}/../python/python_file.zip"
 }
 
 # Lambda Function
