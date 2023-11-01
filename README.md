@@ -6,6 +6,9 @@ Expose a 'POST' API endpoint using AWS API Gateway
 API request should be handled by AWS Lambda, Lambda should simply store the request's JSON body to an S3 bucket as a file
 Whenever a new file is created in the above S3 bucket - a notification should be pushed to an SNS topic with the file details
 
+### Solution:
+The Terraform code provisions all the required services and configures the services to achieve the above use case. The Lambda function uses the code present in python/index.py
+
 #### Screenshots from AWS portal
 
 #### S3
